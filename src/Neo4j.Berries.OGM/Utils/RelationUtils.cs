@@ -18,6 +18,18 @@ internal static class RelationUtils
         }
     }
 
+    internal static string Format(this IRelationConfiguration relation, string condition, string alias = null)
+    {
+        if (relation.Direction == RelationDirection.Out)
+        {
+            return $"-[{alias}:{relation.Label} WHERE {condition}]->";
+        }
+        else
+        {
+            return $"<-[{alias}:{relation.Label} WHERE {condition}]-";
+        }
+    }
+
     internal static IEnumerable<KeyValuePair<string, object>> GetRelations(this IEnumerable<Dictionary<string, object>> input, NodeConfiguration nodeConfig, Func<object, bool> checker)
     {
         return input
