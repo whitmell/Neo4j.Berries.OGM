@@ -21,6 +21,10 @@ public static class ObjectUtils
     {
         return input.GetType().IsAssignableTo(typeof(IDictionary));
     }
+    internal static bool IsDictionary(this Type inputType)
+    {
+        return inputType.IsAssignableTo(typeof(IDictionary));
+    }
     private static bool IsListOfInterfaces(this List<object> inputType)
     {
         var interfaces = inputType
@@ -41,6 +45,13 @@ public static class ObjectUtils
     internal static bool IsCollection(this object input)
     {
         return input.GetType().IsAssignableTo(typeof(IEnumerable)) && !input.IsDictionary();
+    }
+    /// <summary>
+    /// Checks if the type is a collection, but being a dictionary collection is excluded.
+    /// </summary>
+    internal static bool IsCollection(this Type inputType)
+    {
+        return inputType.IsAssignableTo(typeof(IEnumerable)) && !inputType.IsDictionary();
     }
     internal static Dictionary<string, object> NormalizeValuesForNeo4j(this Dictionary<string, object> input, bool recursion = false)
     {
