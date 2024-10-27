@@ -42,16 +42,6 @@ public class NodeTypeBuilderTests : TestBase
     }
 
     [Fact]
-    public void Should_Add_Property_To_IncludedProperties_On_Include()
-    {
-
-        var sut = new NodeTypeBuilder<Movie>();
-        sut.Include(x => x.Director);
-
-        Neo4jSingletonContext.Configs["Movie"].IncludedProperties.Should().Contain("Director");
-    }
-
-    [Fact]
     public void Should_Remove_Property_From_ExcludedProperties_On_Include()
     {
 

@@ -97,7 +97,6 @@ where TNode : class
                 .Select(x => Neo4jSingletonContext.PropertyCaseConverter(((MemberExpression)x.Body).Member.Name)).ToList()
                 .ForEach(x =>
                 {
-                    Config.IncludedProperties.Add(x);
                     if (Config.ExcludedProperties.Any(e => e == x))
                     {
                         removeFromExclude.Add(x);

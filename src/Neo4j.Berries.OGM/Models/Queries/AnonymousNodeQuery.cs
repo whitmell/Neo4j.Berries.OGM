@@ -204,7 +204,7 @@ public class NodeQuery
         var matchesToMap = new List<IMatch> { Matches.First() };
 
         matchesToMap.AddRange(Matches.OfType<MatchRelationModel>()
-            .Where(x => NodeConfig.IncludedProperties.Contains(x.RelationProperty) && !NodeConfig.ExcludedProperties.Contains(x.RelationProperty)).ToList());
+            .Where(x => !NodeConfig.ExcludedProperties.Contains(x.RelationProperty)).ToList());
 
         var response = ExecuteWithMap(MapNodeWithRelations<TResult>(matchesToMap), _cypher);
         if (!response.Any()) return null;
@@ -221,7 +221,7 @@ public class NodeQuery
         var matchesToMap = new List<IMatch> { Matches.First() };
 
         matchesToMap.AddRange(Matches.OfType<MatchRelationModel>()
-            .Where(x => NodeConfig.IncludedProperties.Contains(x.RelationProperty) && !NodeConfig.ExcludedProperties.Contains(x.RelationProperty)).ToList());
+            .Where(x => !NodeConfig.ExcludedProperties.Contains(x.RelationProperty)).ToList());
 
         var response = await ExecuteWithMapAsync(MapNodeWithRelations<TResult>(matchesToMap), _cypher, cancellationToken);
         if (!response.Any()) return null;
@@ -239,7 +239,7 @@ public class NodeQuery
         var matchesToMap = new List<IMatch> { Matches.First() };
 
         matchesToMap.AddRange(Matches.OfType<MatchRelationModel>()
-            .Where(x => NodeConfig.IncludedProperties.Contains(x.RelationProperty) && !NodeConfig.ExcludedProperties.Contains(x.RelationProperty)).ToList());
+            .Where(x => !NodeConfig.ExcludedProperties.Contains(x.RelationProperty)).ToList());
 
         var response = ExecuteWithMap(MapNodeWithRelations<TResult>(matchesToMap), _cypher);
         return response.ToList();
@@ -255,7 +255,7 @@ public class NodeQuery
         var matchesToMap = new List<IMatch> { Matches.First() };
 
         matchesToMap.AddRange(Matches.OfType<MatchRelationModel>()
-            .Where(x => NodeConfig.IncludedProperties.Contains(x.RelationProperty) && !NodeConfig.ExcludedProperties.Contains(x.RelationProperty)).ToList());
+            .Where(x => !NodeConfig.ExcludedProperties.Contains(x.RelationProperty)).ToList());
 
         var response = await ExecuteWithMapAsync(MapNodeWithRelations<TResult>(matchesToMap), _cypher, cancellationToken);
         return response.ToList();

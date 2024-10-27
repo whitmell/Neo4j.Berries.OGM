@@ -141,15 +141,8 @@ public static class ObjectUtils
                 obj[prop.Name] = value.ToDictionary(config, propertyCaseConverter, relation?.EndNodeMergeProperties, iterations + 1);
                 continue;
             }
-            if (
-                (mergeProperties.Any() && mergeProperties.Contains(propName)) ||
-                (!mergeProperties.Any() &&
-                    ((!nodeConfig.ExcludedProperties.Contains(propName) && !nodeConfig.ExcludedProperties.IsEmpty) ||
-                    (nodeConfig.IncludedProperties.Contains(propName) && !nodeConfig.IncludedProperties.IsEmpty)))
-                )
-                obj[propName] = value.ToNeo4jValue();
-            else if (!mergeProperties.Any() && nodeConfig.ExcludedProperties.IsEmpty && nodeConfig.IncludedProperties.IsEmpty)
-            {
+            if ((mergeProperties.Any() && mergeProperties.Contains(propName)) || (!mergeProperties.Any() && !nodeConfig.ExcludedProperties.Contains(propName)))
+            { 
                 if (value is DateTime)
                 {
                     var parsedValue = DateTime.Parse(value.ToString());

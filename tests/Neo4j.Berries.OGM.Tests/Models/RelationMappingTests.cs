@@ -22,8 +22,6 @@ namespace Neo4j.Berries.OGM.Tests.Models
             {
                 ClearDatabase();
                 Neo4jSingletonContext.Configs["Movie"].ExcludedProperties.Clear();
-                Neo4jSingletonContext.Configs["Movie"].IncludedProperties.Add("Director");
-                Neo4jSingletonContext.Configs["Movie"].IncludedProperties.Add("Actors");
 
                 List<Mocks.Models.Person> actors = [];
 
@@ -34,8 +32,6 @@ namespace Neo4j.Berries.OGM.Tests.Models
                     .RuleFor(x => x.FirstName, f => f.Person.FirstName)
                     .RuleFor(x => x.LastName, f => f.Person.LastName)
                     .Generate(3);
-                    //TestGraphContext.People.AddRange(actors);
-                    //await TestGraphContext.SaveChangesAsync();
                 }
 
                 List<Mocks.Models.Movie> movies = [];
